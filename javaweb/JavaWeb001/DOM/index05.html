@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .ys1{
+      color:red;
+    }
+    .ys2{
+      color:blue;
+    }
+  </style>
+</head>
+<body>
+<input type="checkbox" id="hobby" value="read">
+<!--<input type="checkbox" ="hobby" value="jogging">-->
+<span id="s1" class="ys1">天気がいいから</span>
+  <script>
+    var s1=document.getElementById("s1");
+    alert(s1.innerHTML);
+    s1.innerHTML="今天好像要下雪";
+    s1.innerHTML+=",今天0度";
+  </script>
+</body>
+</html>

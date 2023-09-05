@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    function run(){
+      alert("表单的提交按钮被点击了");
+      return true;
+    }
+  </script>
+</head>
+<body>
+  <form onsubmit="return run()">
+    <input type="text" name="uname"/><br/>
+    <input type="submit" value="提交"/>
+  </form>
+</body>
+</html>

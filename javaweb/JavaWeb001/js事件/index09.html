@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    function run1(){
+      alert("run1");
+    }
+    function run2(str){
+      alert(str);
+    }
+    function run3(obj){
+      alert(obj);
+    }
+  </script>
+</head>
+<body>
+  <form>
+    <input type="text" name="name1" onclick="run1()"/><br/>
+    <input type="text" name="name2" onclick="run2('hello world')"/><br/>
+    <input type="text" name="name3" onclick="run3(this)"/><br/>
+
+    <input type="submit" value="提交"/>
+  </form>
+</body>
+</html>

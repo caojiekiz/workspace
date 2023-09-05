@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .ys1{
+      color:red;
+    }
+    .ys2{
+      color:blue;
+    }
+  </style>
+</head>
+<body>
+<input type="text" id="t1" value="hello"/>
+<input type="checkbox" name="hobby" value="read">
+<ul>
+  <li>javaee</li>
+  <li>android</li>
+  <li>IOS</li>
+  <li>php</li>
+</ul>
+<input type="radio" name="sex" value="man" class="h1"/>
+<input type="radio" name="sex" value="woman" class="h1"/>
+<span id="s1" class="ys1">天気がいいから</span>
+  <script>
+    var s1=document.getElementById("s1");
+    alert(s1.className);
+    s1.className="ys2";
+  </script>
+</body>
+</html>

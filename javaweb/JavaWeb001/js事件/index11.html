@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    function run1(){
+      alert("run1");
+    }
+   // window.onload=run1;
+    window.onload=function (){
+      run1();
+      var t1= document.getElementById("t1");
+      t1.onclick=function (){
+        run1();
+        //run2();
+      }
+    }
+
+  </script>
+</head>
+<body>
+  <form>
+    <input id="t1" type="text" name="name1"/><br/>
+
+    <input type="submit" value="提交"/>
+  </form>
+</body>
+</html>
