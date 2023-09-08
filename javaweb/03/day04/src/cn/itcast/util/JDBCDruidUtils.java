@@ -65,4 +65,7 @@ public class JDBCDruidUtils {
             }
         }
     }
+    public static DataSource getDataSource(){
+        return ds;
+    }
 }

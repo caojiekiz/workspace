@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<students>
+    <student number="kiz_0001">
+        <name id="kiz">zhangsan</name>
+        <age>33</age>
+        <sex>male</sex>
+    </student>
+    <student number="kiz_0002">
+        <name>lisi</name>
+        <age>22</age>
+        <sex>male</sex>
+    </student>
+</students> 
