@@ -33,19 +33,44 @@
                 location.href="${pageContext.request.contextPath}/delUserServlet?id=" + id;
             }
         }
+        window.onload = function (){
+            document.getElementById("delSelected").onclick = function (){
+                if(confirm("削除しますか?")){
+                    var flag = false;
+                    var cbs = document.getElementsByName("uid");
+                    for (var i = 0; i < cbs.length; i++) {
+                        if (cbs[i].checked) {
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if (flag){
+                        document.getElementById("delId").submit();
+                    }
+
+                }
+
+            }
+            document.getElementById("selectAll").onclick = function (){
+                var cbs = document.getElementsByName("uid");
+                for (var i = 0; i < cbs.length; i++) {
+                    cbs[i].checked = this.checked;
+                }
+            }
+        }
     </script>
 </head>
 <body>
 <div class="container">
     <h3 style="text-align: center">ユーザーリスト</h3>
     <div style="float: left;margin: 5px">
-        <form class="row row-cols-lg-auto g-3 align-items-center">
+        <form class="row row-cols-lg-auto g-3 align-items-center" action="${pageContext.request.contextPath}/findUserByPageServlet" method="post">
             <div class="col-12">
                 <label class="visually-hidden" for="inlineFormInputGroupUsername"
                 >Username</label>
                 <div class="input-group">
                     <div class="input-group-text">名前</div>
-                    <input type="text" class="form-control" id="inlineFormInputGroupUsername"/>
+                    <input type="text" name="name" value="${condition.name[0]}" class="form-control" id="inlineFormInputGroupUsername"/>
                 </div>
             </div>
             <div class="col-12">
@@ -53,7 +78,7 @@
                 >Seki</label>
                 <div class="input-group">
                     <div class="input-group-text">本籍</div>
-                    <input type="text" class="form-control" id="inlineFormInputGroupSeki"/>
+                    <input type="text" name="address" value="${condition.address[0]}" class="form-control" id="inlineFormInputGroupSeki"/>
                 </div>
             </div>
             <div class="col-12">
@@ -61,7 +86,7 @@
                 >Email</label>
                 <div class="input-group">
                     <div class="input-group-text">Email</div>
-                    <input type="text" class="form-control" id="inlineFormInputGroupEmail"/>
+                    <input type="text" name="email" value="${condition.email[0]}" class="form-control" id="inlineFormInputGroupEmail"/>
                 </div>
             </div>
             <div class="col-12">
@@ -71,12 +96,12 @@
     </div>
     <div style="float: right;margin: 5px">
         <a class="btn btn-primary" href="${pageContext.request.contextPath}/add.jsp">添加联系人</a>
-        <a class="btn btn-primary" href="add.html">删除选中</a>
+        <a class="btn btn-primary" href="javascript:void(0);" id="delSelected">删除选中</a>
     </div>
-    <form action="${pageContext.request.contextPath}/delSelectedServlet" method="post">
+    <form id="delId" action="${pageContext.request.contextPath}/delSelectedServlet" method="post">
         <table border="1" class="table table-bordered table-hover">
         <tr class="success">
-            <th><input type="checkbox"></th>
+            <th><input type="checkbox" id="selectAll"></th>
             <th>番号</th>
             <th>名前</th>
             <th>性別</th>
@@ -86,9 +111,9 @@
             <th>メール</th>
             <th>操作</th>
         </tr>
-        <c:forEach items="${users}" var="user" varStatus="s">
+        <c:forEach items="${pb.list}" var="user" varStatus="s">
         <tr>
-            <th><input type="checkbox"></th>
+            <th><input type="checkbox" name="uid" value="${user.id}"></th>
             <td>${s.count}</td>
             <td>${user.name}</td>
             <td>${user.gender}</td>
@@ -106,25 +131,38 @@
     </table>
     </form>
     <div>
-        <nav aria-label="Page navigation example">
+        <nav aria-label="Page navigation">
             <ul class="pagination">
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
+                <c:if test="${pb.currentPage == 1}">
+                    <li class="page-item disabled">
+                </c:if>
+                <c:if test="${pb.currentPage != 1}">
+                    <li class="page-item">
+                </c:if>
+                    <a class="page-link" href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${pb.currentPage - 1}&rows=5&name=${condition.name[0]}&address=${condition.address[0]}&email=${condition.email[0]}" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
+                    </li>
+                <c:forEach begin="1" end="${pb.totalPage}" var="i">
+                    <c:if test="${pb.currentPage == i}">
+                        <li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${i}&rows=5&name=${condition.name[0]}&address=${condition.address[0]}&email=${condition.email[0]}">${i}</a></li>
+                    </c:if>
+                    <c:if test="${pb.currentPage != i}">
+                        <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${i}&rows=5&name=${condition.name[0]}&address=${condition.address[0]}&email=${condition.email[0]}">${i}</a></li>
+                    </c:if>
+                </c:forEach>
+                <c:if test="${pb.currentPage == pb.totalPage}">
+                    <li class="page-item disabled">
+                </c:if>
+                <c:if test="${pb.currentPage != pb.totalPage}">
+                    <li class="page-item">
+                </c:if>
+                    <a class="page-link" href="${pageContext.request.contextPath}/findUserByPageServlet?currentPage=${pb.currentPage + 1}&rows=5&name=${condition.name[0]}&address=${condition.address[0]}&email=${condition.email[0]}" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
                 <span style="font-size: 25px;margin-left: 5px;">
-                    共16条记录,共4ページ
+                    共${pb.totalCount}条记录,共${pb.totalPage}ページ
                 </span>
             </ul>
         </nav>
