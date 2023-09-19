@@ -16,8 +16,9 @@ public class ProxyTest {
                 if(method.getName().equals("sale")) {
                     double money = (double) args[0];
                     money = money * 0.85;
-                    Object obj = method.invoke(lenovo, money );
-                    return obj;
+                    String obj = (String)method.invoke(lenovo, money );
+                    //增强返回值
+                    return obj + "mat";
                 }else{
                     Object obj = method.invoke(lenovo, args);
                     return obj;
@@ -26,7 +27,7 @@ public class ProxyTest {
             }
         });
         String sale = proxy_lenovo.sale(8000);
-        System.out.println(sale);
+        //System.out.println(sale);
         //proxy_lenovo.show();
     }
 }
