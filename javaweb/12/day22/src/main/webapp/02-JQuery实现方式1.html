@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="webjars/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+        function fun(){
+            $.ajax({
+                url:"ajaxServlet",
+                type:"POST",
+                data:{"username":"jack","age":23},
+                success:function (data) {
+                    alert(data);
+                },
+                error:function (){
+                    alert("出错了...");
+                },
+                dataType:"test"
+            });
+
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="发送异步请求" onclick="fun();">
+    <input>
+</body>
+</html>

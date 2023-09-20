@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script>
+      var person = {"name":"张三",age:23,'gender':true};
+      var name = person["name"];
+      //alert(name);
+      //alert(person);
+      var persons = {"persons":[
+                {"name":"张三","age":23,"gender":true},
+                {"name":"lisi","age":32,"gender":false},
+                {"name":"wangwu","age":43,"gender":true}
+                ]
+      };
+      var name1 = persons.persons[2].name;
+      //alert(name1);
+      var ps = [{"name":"张三","age":23,"gender":true},
+                {"name":"张三2","age":233,"gender":true},
+                {"name":"张三3","age":3,"gender":true}];
+      alert(ps[1].name);
+  </script>
+</head>
+<body>
+
+</body>
+</html>
