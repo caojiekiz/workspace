@@ -2,7 +2,10 @@ package cn.itcast.travel.web.servlet;
 
 import cn.itcast.travel.domain.ResultInfo;
 import cn.itcast.travel.domain.User;
+import cn.itcast.travel.service.FavoriteService;
 import cn.itcast.travel.service.UserService;
+import cn.itcast.travel.service.impl.FavoriteServiceImpl;
+import cn.itcast.travel.service.impl.RouteServiceImpl;
 import cn.itcast.travel.service.impl.UserServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.*;
@@ -17,6 +20,14 @@ import java.util.Map;
 @WebServlet("/user/*")
 public class UserServlet extends BaseServlet {
     private UserService service = new UserServiceImpl();
+
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void regist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String check = request.getParameter("check");
         HttpSession session = request.getSession();
@@ -89,9 +100,10 @@ public class UserServlet extends BaseServlet {
 
     public void findOne(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Object user = request.getSession().getAttribute("user");
-        ObjectMapper mapper = new ObjectMapper();
-        response.setContentType("application/json;charset=utf-8");
-        mapper.writeValue(response.getOutputStream(),user);
+//        ObjectMapper mapper = new ObjectMapper();
+//        response.setContentType("application/json;charset=utf-8");
+//        mapper.writeValue(response.getOutputStream(),user);
+        writeValue(user,response);
     }
     public void exit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getSession().invalidate();
