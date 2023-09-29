@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="bookDao" class="com.itheima.dao.impl.BookDaoImpl">
+        <property name="array">
+            <array>
+                <value>100</value>
+                <value>200</value>
+                <value>300</value>
+            </array>
+        </property>
+        <property name="list">
+            <list>
+                <value>Mon</value>
+                <value>Tue</value>
+                <value>Wen</value>
+            </list>
+        </property>
+        <property name="set">
+            <set>
+                <value>Mon1</value>
+                <value>Tue2</value>
+                <value>Wen3</value>
+                <value>Wen3</value>
+            </set>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="country" value="China"></entry>
+                <entry key="province" value="jiangsu"></entry>
+                <entry key="city" value="nanjing"></entry>
+
+            </map>
+        </property>
+        <property name="properties">
+            <props>
+                <prop key="country">China</prop>
+                <prop key="province">jiangsu</prop>
+                <prop key="city">nanjing</prop>
+            </props>
+        </property>
+    </bean>
+
+<!--    <bean id="userDao" class="com.itheima.dao.impl.UserDaoImpl"/>-->
+
+<!--    <bean id="userDao" class="com.itheima.dao.impl.UserDaoImpl"></bean>-->
+    <bean id="bookService" class="com.itheima.service.impl.BookServiceImpl" autowire="byType">
+    </bean>
+</beans>
